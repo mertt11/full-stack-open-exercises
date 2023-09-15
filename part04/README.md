@@ -33,19 +33,3 @@ All necessary information for doing this, and the next two exercises, can be fou
 **0.4: Solution!** <br />
 ![Image Alt Text](https://github.com/mertt11/full-stack-open-exercises/blob/main/part04/04.png)
 
----
-
-**0.5: Single page app diagram** <br />
-Create a diagram depicting the situation where the user goes to the single-page app version of the notes app at https://studies.cs.helsinki.fi/exampleapp/spa.
-
-**0.5: Solution!** <br />
-![Image Alt Text](https://github.com/mertt11/full-stack-open-exercises/blob/main/part04/05.png)
-
----
-**0.6: New note in Single page app diagram** <br />
-Create a diagram depicting the situation where the user creates a new note using the single-page version of the app.
-
-This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the submission system.
-
-**0.6: Solution!** <br />
-![Image Alt Text](https://github.com/mertt11/full-stack-open-exercises/blob/main/part04/06.png)
