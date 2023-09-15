@@ -1,4 +1,4 @@
-0.4: New note
+##**0.4: New note**
 In chapter Loading a page containing JavaScript - review the chain of events caused by opening the page https://studies.cs.helsinki.fi/exampleapp/notes is depicted as a sequence diagram
 
 The diagram was made using websequencediagrams service as follows:
