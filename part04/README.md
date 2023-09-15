@@ -31,5 +31,5 @@ The diagram does not have to be a sequence diagram. Any sensible way of presenti
 All necessary information for doing this, and the next two exercises, can be found from the text of this part. The idea of these exercises is to read the text through once more, and to think through what is going on there. Reading the application code is not necessary, but it is of course possible.
 
 **0.4: Solution!**
-![Image Alt Text](./0.4.png)
+![Image Alt Text](./04.png)
 
