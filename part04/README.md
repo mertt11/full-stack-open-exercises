@@ -32,4 +32,3 @@ All necessary information for doing this, and the next two exercises, can be fou
 
 **0.4: Solution!** <br />
 ![Image Alt Text](https://github.com/mertt11/full-stack-open-exercises/blob/main/part04/04.png)
-
