@@ -1,74 +1,102 @@
+import { useState } from 'react'
+
+const Button = ({handleClick,text}) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
+
 const Header = (props) => {
   return (
-      <span>
-        Name of the course is {props.course.name} 
-      </span>
-  )
-}
-
-const Content= (props) => {
-  return (
     <span>
-      <Part part={props.content[0].name} exercise={props.content[0].exercises}/>
-      <br />
-      <Part part={props.content[1].name} exercise={props.content[1].exercises}/>
-      <br />
-      <Part part={props.content[2].name} exercise={props.content[2].exercises}/>
+      <h1>{props.course}</h1> 
     </span>
   )
 }
 
-const Part = (props) => {
-  return (
-    <span>
-    <b>Content:</b> {props.part} <b>Num of exercises:</b> {props.exercise} 
-    </span>
-  )
-}
-
-const Total = (props)  => {
-  return (
-    <span> Total num of exercisess {props.total[0].exercises+props.total[1].exercises+props.total[2].exercises}</span>
-  )
-}
-
-const App = () => {
-
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
+const StatisticLine = (props) => {
+  if(props.text==='positive'){
+    return (
+      <div>
+        {props.text} {props.value} %
+      </div>
+    ) 
   }
 
   return (
     <div>
-      <h1>{course.name}</h1>
+      {props.text} {props.value}
+    </div>
+  )
+}
+
+const Statistics = ({count}) => {
+  let total=count[0]+count[1]+count[2];
+
+  if(total===0){
+    return (
+      <div>No feedback given</div> 
+    )
+  }
+
+  return (
+    <div>
+        <StatisticLine text="good" value ={count[0]} />
+        <StatisticLine text="neutral" value ={count[1]} />
+        <StatisticLine text="bad" value ={count[2]} />
+        <StatisticLine text="all" value ={total} />
+        <StatisticLine text="average" value ={(1*count[0]+0*count[1]+(-1*count[2]))/total} />
+        <StatisticLine text="positive" value ={(count[0]/total)*100} />
+    </div>
+  )
+}
+
+const App = () => {
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  const handleLeftClick = () => {
+    setGood(good+1);
+  }
+
+  const handleMiddleClick = () => {
+    setNeutral(neutral+1);
+  }
+
+  const handleRightClick = () => {
+    setBad(bad+1);
+  }
+
+  const course = {
+    firstHeader:'give feedback',
+    secondHeader:'statistics'
+  }
+
+  return (
+    <div>
+
+      <div>
+        <Header course={course.firstHeader}/>
+      </div>
 
       <p>
-        <Header course={course}/>
+        <Button handleClick={handleLeftClick} text='good' />
+        <Button handleClick={handleMiddleClick} text='neutral' />
+        <Button handleClick={handleRightClick} text='bad' />
       </p>
 
-       <p>
-        <Content content={course.parts}/>
-      </p>  
-      
-      <p>
-         <Total total={course.parts}/> 
-      </p>   
+      <div>
+        <Header course = {course.secondHeader}/>
+      </div> 
+
+      <div>
+        <Statistics count={[good,neutral,bad]}/>
+      </div>
 
     </div>
   )
 }
+
 export default App
