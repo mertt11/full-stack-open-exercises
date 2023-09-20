@@ -29,14 +29,21 @@ const Display = (props) =>{
     console.log("**********************************");
   }
 
-  const MostVotes = (props) =>{
-    return (
-      <div> 
-        {props.anecdotes[props.index]} 
-        <br />
-        has {props.maxPoint} votes
-      </div>
-    )
+  const MostVotes = ({points, anecdotes,voteGiven}) =>{
+    const highestVote=Math.max(...points);
+    const highestVoteIndex=points.indexOf(highestVote)
+    const anectode=anecdotes[highestVoteIndex]
+
+    if(voteGiven===true){
+      return (
+        <div> 
+          {anectode} 
+          <br />
+          has {highestVote} votes
+        </div>
+      )
+    }
+
   }
 
 const App = () => {
@@ -54,9 +61,6 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const [voteGiven,setVoteGiven]=useState(false);
   const [points, setPoints] = useState(Array(anecdotes.length).fill(0));
-  const [maxPoint, setMax] = useState(0);
-  const [index, setIndex] = useState(0) 
-
 
   const handleButtonClick = () => {
     let random = Math.floor(Math.random()* anecdotes.length);
@@ -65,28 +69,14 @@ const App = () => {
 
   const handleVoteClick = () => {
 
-    const updatedPoints = {...points};
+    const updatedPoints = [...points];
     updatedPoints[selected] += 1;
     setPoints(updatedPoints); 
 
-    pointss(updatedPoints);
+   /*  pointss(updatedPoints); */
 
     setVoteGiven(true);
-    getMax(updatedPoints)
   }
-  
-  const getMax = (updatedPoints) => {
-    let max=0;
-    let i=0;
-    for( const k in updatedPoints){
-      if(max<updatedPoints[k]){
-        max=updatedPoints[k]
-        i=k;
-      }
-    }
-    setIndex(i)
-    setMax(max)
-  } 
 
   return (
     <div>
@@ -98,7 +88,7 @@ const App = () => {
       <Button handleClick={handleButtonClick} text='next anectode' /> 
       <br />
       <Header text='Anecdote with most votes'/>  
-      <MostVotes points={points} anecdotes={anecdotes} maxPoint={maxPoint} index={index}/> 
+      <MostVotes points={points} anecdotes={anecdotes} voteGiven={voteGiven}/> 
     </div>
   )
 
