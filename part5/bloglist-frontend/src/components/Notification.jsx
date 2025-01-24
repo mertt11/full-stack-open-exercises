@@ -1,7 +1,7 @@
-const Notification = ({message}) => {
-  let typ = message.type==='error' ? 'error' : 'success'
+const Notification = ({ message }) => {
+  let typ = message.type==="error" ? "error" : "success"
 
-if(message.msg===null){
+  if(message.msg===null){
     return null
   }
   return (

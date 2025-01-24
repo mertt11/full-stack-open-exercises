@@ -29,7 +29,7 @@ const del = async (id) => {
     return response.data
   } catch (error) {
     console.error("Error deleting blog:", error)
-    throw error // Rethrow the error to be handled in the calling function
+    throw error
   }
 }
 

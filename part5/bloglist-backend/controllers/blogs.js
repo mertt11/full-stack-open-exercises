@@ -40,23 +40,31 @@ blogsRouter.delete(
   "/:id",
   middleware.userExtractor,
   async (request, response) => {
-    const blogToBeDeleted = await Blog.findById(request.params.id)
-    const user = request.user
-    console.log("Attempting to delete blog:", blogToBeDeleted.title) // Log the blog title being deleted
-    if (user._id.toString() === blogToBeDeleted.user.toString()) {
-      await Blog.findByIdAndDelete(blogToBeDeleted._id)
-      console.log("Blog deleted successfully:", blogToBeDeleted.title) // Log successful deletion
-      response.status(204).end()
-    } else {
-      const getWhoHasAuth = async (userId) => {
-        const user = await User.findById(userId)
-        return user.name
+    try {
+      const blogToBeDeleted = await Blog.findById(request.params.id)
+      const user = request.user
+      /*     console.log("user:", user)
+      console.log("blogTo be deleted,", blogToBeDeleted) */
+      if (user._id.toString() === blogToBeDeleted.user.toString()) {
+        await Blog.findByIdAndDelete(blogToBeDeleted._id)
+        response.status(204).end()
+      } else {
+        console.log("second else girdi")
+        const getWhoHasAuth = async (userId) => {
+          const user = await User.findById(userId)
+          return user.name
+        }
+        return response
+          .status(403)
+          .json({
+            error: `You can't delete this blog, only ${await getWhoHasAuth(
+              blogToBeDeleted.user.toString()
+            )} has authority to delete this blog`,
+          })
+          .end()
       }
-      return response.json({
-        error: `You can't delete this blog, only ${await getWhoHasAuth(
-          blogToBeDeleted.user.toString()
-        )} has authority to delete this blog`,
-      })
+    } catch (e) {
+      response.status(500).json({ error: "int servr err" })
     }
   }
 )
